@@ -7,29 +7,140 @@
         <variable
             name="todo"
             type="com.coolya.i1.data.ToDo" />
+
+        <import type="android.view.View" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_half_default"
-        >
+        android:layout_marginTop="@dimen/margin_half_default">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_default"
-            >
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/done"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintBottom_toBottomOf="@id/container"
+                android:visibility="@{todo.done ? View.VISIBLE : View.GONE}"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#6F000000"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintBottom_toBottomOf="@id/container"
+                android:visibility="@{todo.done ? View.VISIBLE : View.GONE}"
+                />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{todo.title}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="@dimen/margin_default">
 
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/current_progress"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(todo.currentProgress)}"
+                    android:textColor="@{todo.done ? @android:color/white : @android:color/black}"
+                    app:layout_constraintBottom_toTopOf="@id/title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/slash"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textColor="@{todo.done ? @android:color/white : @android:color/black}"
+                    app:layout_constraintBottom_toTopOf="@id/title"
+                    app:layout_constraintStart_toEndOf="@id/current_progress"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/quantity"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(todo.quantity)}"
+                    android:textColor="@{todo.done ? @android:color/white : @android:color/black}"
+                    app:layout_constraintBottom_toBottomOf="@+id/slash"
+                    app:layout_constraintStart_toEndOf="@id/slash"
+
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_half_default"
+                    android:text="@{todo.type.type}"
+                    android:textColor="@{todo.done ? @android:color/white : @android:color/black}"
+                    app:layout_constraintBottom_toTopOf="@id/title"
+                    app:layout_constraintStart_toEndOf="@id/quantity"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{todo.title}"
+                    android:textColor="@android:color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/quantity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/current_progress" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/todo_current_progress"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="@{String.valueOf(todo.progress)}"
+                    android:textAlignment="center"
+                    android:textColor="@{todo.done ? @android:color/white : @android:color/black}"
+                    app:layout_constraintBottom_toBottomOf="@id/progress"
+                    app:layout_constraintEnd_toEndOf="@id/progress"
+                    app:layout_constraintStart_toStartOf="@id/progress"
+                    app:layout_constraintTop_toTopOf="@id/progress" />
+
+                <me.tankery.lib.circularseekbar.CircularSeekBar
+                    android:id="@+id/progress"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    app:cs_disable_pointer="true"
+                    app:cs_disable_progress_glow="true"
+                    app:cs_lock_enabled="true"
+                    app:layout_constraintBottom_toBottomOf="@id/title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/current_progress"
+                    app:progress="@{todo.progress}" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </com.google.android.material.card.MaterialCardView>
 </layout>

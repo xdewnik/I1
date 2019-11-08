@@ -23,6 +23,10 @@ android {
         enabled = true
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -66,10 +70,20 @@ dependencies {
 
     implementation "com.squareup.okio:okio:2.4.0"
 
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation 'me.tankery.lib:circularSeekBar:1.2.0'
+
+
+
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.1'
+
+
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+
 
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"

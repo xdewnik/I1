@@ -7,6 +7,10 @@
         <variable
             name="delegate"
             type="com.coolya.i1.ui.create.ui.CreateTodoDelegate" />
+
+        <variable
+            name="type"
+            type="com.coolya.i1.data.Type" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,19 +25,78 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="title"
+            android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/times"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="number of times"
             android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:singleLine="true"
+            app:layout_constraintEnd_toStartOf="@id/spinner"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/times"
+            app:layout_constraintEnd_toStartOf="@id/add_type_button"
+            app:layout_constraintTop_toTopOf="@id/times"
+            app:typeList="@{delegate.viewModel.typeList}" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/add_type_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?android:selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="@id/times"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/times"
+            app:srcCompat="@drawable/ic_add" />
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/add_type_expand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_duration="1000"
+            app:el_expanded="false"
+            app:layout_constraintTop_toBottomOf="@id/times">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/new_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter new type"
+                    android:singleLine="true"
+                    android:text="@={type.type}"
+                    app:layout_constraintEnd_toStartOf="@id/add_new_type_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/add_new_type_button"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?android:selectableItemBackground"
+                    app:layout_constraintBottom_toBottomOf="@+id/new_type"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/new_type"
+                    app:srcCompat="@drawable/ic_check" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </net.cachapa.expandablelayout.ExpandableLayout>
 
 
         <com.google.android.material.button.MaterialButton
@@ -41,10 +104,10 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="close"
             android:layout_marginEnd="@dimen/margin_half_default"
+            android:text="close"
             app:layout_constraintEnd_toStartOf="@id/save_button"
-            app:layout_constraintTop_toBottomOf="@id/times" />
+            app:layout_constraintTop_toBottomOf="@id/add_type_expand" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/save_button"
@@ -53,7 +116,7 @@
             android:layout_height="wrap_content"
             android:text="Save"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/times" />
+            app:layout_constraintTop_toBottomOf="@id/add_type_expand" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

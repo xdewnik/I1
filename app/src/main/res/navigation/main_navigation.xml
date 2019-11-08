@@ -8,14 +8,21 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.coolya.i1.ui.main.ui.MainFragment"
-        android:label="MainFragment"
         >
         <action
             android:id="@+id/action_mainFragment_to_createTodoFragment"
             app:destination="@id/createTodoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_progressFragment"
+            app:destination="@id/progressFragment"
+            />
     </fragment>
     <dialog
         android:id="@+id/createTodoFragment"
         android:name="com.coolya.i1.ui.create.ui.CreateTodoFragment"
-        android:label="CreateTodoFragment" />
+        />
+    <fragment
+        android:id="@+id/progressFragment"
+        android:name="com.coolya.i1.ui.progress.ui.ProgressFragment"
+        />
 </navigation>

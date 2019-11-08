@@ -2,8 +2,9 @@ package com.coolya.i1
 
 import android.app.Application
 import com.coolya.i1.room.DBModule
-import com.coolya.i1.ui.main.di.CreateModule
-import com.coolya.i1.ui.main.di.MainModule
+import com.coolya.i1.di.CreateModule
+import com.coolya.i1.di.MainModule
+import com.coolya.i1.di.ProgressModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -20,7 +21,8 @@ class App : Application() {
                 listOf(
                     MainModule,
                     DBModule,
-                    CreateModule
+                    CreateModule,
+                    ProgressModule
                 )
             )
         }

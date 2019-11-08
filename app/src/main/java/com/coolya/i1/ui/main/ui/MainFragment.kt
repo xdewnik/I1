@@ -10,9 +10,12 @@ import com.coolya.i1.ui.main.adapter.ToDoAdapter
 import com.coolya.i1.ui.main.vm.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import android.media.MediaPlayer
+
+
 
 class MainFragment : BaseFragment<FragmentMainBinding>() {
-    override fun setAppBarTitle(): String? = "i1 todos"
+    override fun setAppBarTitle(): String? = "Зал ожидания"
 
     override fun setLayoutId(): Int = R.layout.fragment_main
 
@@ -21,5 +24,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.delegate = MainFragmentDelegate(viewModel, ToDoAdapter(), findNavController())
+
     }
 }

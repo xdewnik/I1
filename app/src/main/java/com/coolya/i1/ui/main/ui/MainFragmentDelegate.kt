@@ -1,5 +1,6 @@
 package com.coolya.i1.ui.main.ui
 
+import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavController
 import com.coolya.i1.R
@@ -15,11 +16,14 @@ class MainFragmentDelegate(
 ) {
 
 
-    fun onTodoClick(todo: ToDo){
-
+    fun onTodoClick(todo: ToDo) {
+        navigation.navigate(
+            R.id.action_mainFragment_to_progressFragment,
+            Bundle().apply { putParcelable("todo", todo) })
     }
 
-    fun createTodoPage(view: View){
+    fun createTodoPage(view: View) {
         navigation.navigate(R.id.action_mainFragment_to_createTodoFragment)
     }
+
 }

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="delegate"
+            type="com.coolya.i1.ui.progress.ui.ProgressDelegate" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:done_background= "@{delegate.viewModel.todo.done}"
+            />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#6F000000"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/todo_title"
+            style="@style/TextAppearance.MaterialComponents.Headline3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:text="@{delegate.viewModel.todo.title}"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/todo_current_progress"
+            style="@style/TextAppearance.MaterialComponents.Headline3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:inputType="number"
+            android:textColor="@android:color/white"
+            app:number="@{delegate.viewModel.todo.currentProgress}"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@id/progress"
+            app:layout_constraintStart_toStartOf="@id/progress"
+            app:layout_constraintTop_toTopOf="@id/progress"
+            app:layout_constraintBottom_toBottomOf="@id/progress"
+            />
+
+        <me.tankery.lib.circularseekbar.CircularSeekBar
+            android:id="@+id/progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="60dp"
+            app:cs_circle_stroke_width = "16dp"
+            app:cs_pointer_stroke_width = "20dp"
+            app:progress="@{delegate.viewModel.todo.progress}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todo_title" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/todo_quantity"
+            style="@style/TextAppearance.MaterialComponents.Headline3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:inputType="number"
+            android:textColor="@android:color/white"
+            android:text="@{String.valueOf(delegate.viewModel.todo.quantity)}"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progress" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

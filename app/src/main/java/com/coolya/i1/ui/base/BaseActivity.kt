@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 
 
-abstract class BaseActivity<VB: ViewDataBinding>: AppCompatActivity() {
+abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
 
     protected abstract fun getLayoutId(): Int
 
@@ -18,7 +20,6 @@ abstract class BaseActivity<VB: ViewDataBinding>: AppCompatActivity() {
     protected abstract fun getNavHostFragment(): Int
 
 
-
     final override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = DataBindingUtil.setContentView(this, getLayoutId())
@@ -27,6 +28,7 @@ abstract class BaseActivity<VB: ViewDataBinding>: AppCompatActivity() {
             setGraph(getNavigationGraph())
         }
 
+        setupActionBarWithNavController(this, findNavController(getNavHostFragment()))
         onActivityCreated(savedInstanceState)
 
     }
